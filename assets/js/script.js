@@ -5,8 +5,15 @@ class Propietario{
         this._direccion = direccion;
         this._telefono = telefono;
     }
-    datosPropietario(){
-        return (`El nombre del dueño es: ${this._nombre}. El domicilio es: ${this._direccion}, y el número telefónico es: ${this._telefono}`)
+
+    get getPropietario(){
+        return this._nombre;
+    }
+    get getDireccion(){
+        return this._direccion;
+    }
+    get getTelefono(){
+        return this._telefono;
     }
 };
 
@@ -65,10 +72,22 @@ function registrarDatos(event){
     instanciarAnimal()
     instanciarMascota()
     
-    let resultado = document.querySelector("#resultado ul");
-    resultado.innerHTML = `
-    <li>${objetoPropietario.datosPropietario()}</li>
-    <li>El tipo de animal es un: ${objetoAnimal.getTipo}, mientras que el nombre de la mascota es: ${objetoMascota.getNombre} y la enfermedad es: ${objetoMascota.getEnfermedadAnimal}</li>
+    let resultado = document.querySelector("#resultado");
+    resultado.innerHTML += `
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Información de ${objetoPropietario.getPropietario}
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>Dirección: </strong>${objetoPropietario.getDireccion}   |   <strong>Telefono: </strong>${objetoPropietario.getTelefono}    |    <strong>Mascota: </strong>${objetoAnimal.getTipo}   |    <strong>Nombre: </strong>${objetoMascota.getNombre}   |    <strong>Enfermedad: </strong>${objetoMascota.getEnfermedadAnimal}
+          </div>
+        </div>
+      </div>
+    </div>
     `
     //Limpiar variables globales de objetos
     objetoPropietario = "";
